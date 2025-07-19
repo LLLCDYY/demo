@@ -1,0 +1,28 @@
+# 忽略Keil编译生成的目标文件
+*.axf
+*.o
+*.lst
+*.dep
+*.d
+*.hex
+*.bin
+*.map
+*.lnp
+*.crf
+*.build_log.htm
+
+# 忽略整个输出目录
+Debug/
+Objects/
+Listings/
+DebugConfig/
+
+# 忽略临时文件和IDE相关文件
+*.tmp
+*.bak
+*.log
+
+# Keil IDE相关文件
+*.uvgui.*
+*.uvoptx
+*.uvprojx.user
