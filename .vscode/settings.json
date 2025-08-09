@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stm32f10x.h": "c",
+        "stdio.h": "c",
+        "hal_sys_time.h": "c",
+        "hw_config.h": "c",
+        "hal_system_init.h": "c",
+        "stm32f10x_gpio.h": "c"
+    }
+}

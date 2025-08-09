@@ -132,9 +132,10 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
-{
-}
+// void SysTick_Handler(void)
+// {
+//     g_sys_tick++;  // 递增系统滴答计数器
+// }
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
