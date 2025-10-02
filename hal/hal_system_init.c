@@ -24,6 +24,8 @@ void hal_gpio_init(void)
     GPIO_InitStruct.GPIO_Pin = GP_LED1_PIN;
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GP_LED1_GPIO,&GPIO_InitStruct);
+
+    LED1_HIGH();
 }
 
 void hal_init(void)

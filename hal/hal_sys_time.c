@@ -95,3 +95,34 @@ uint32_t get_systick_ms(void)
 {
     return g_sys_tick;
 }
+
+/**
+ * @brief  获取系统启动以来的微秒数
+ * @param  无
+ * @retval 当前系统时间（单位：微秒）
+ * @note   基于1ms SysTick节拍与当前VAL寄存器拼接，需确保SystemCoreClock正确。
+ *         SysTick 在本工程配置为以 HCLK 为时钟，重装载为 SystemCoreClock/1000 - 1。
+ *         算法：us = g_sys_tick*1000 + 已过去的微秒，其中已过去的微秒由 (LOAD - VAL)/tick_per_us 得到。
+ */
+uint64_t get_time_us(void)
+{
+    uint32_t ms1, ms2, load, val;
+    uint32_t ticks_per_us = SystemCoreClock / 1000000U; // 每微秒的时钟tick数
+
+    /* 多次读取确保不跨毫秒边界（避免竞争条件） */
+    do {
+        ms1 = g_sys_tick;           // 先读毫秒计数
+        load = SysTick->LOAD;       // 装载值（固定为 SystemCoreClock/1000 - 1）
+        val  = SysTick->VAL;        // 当前递减计数值
+        ms2 = g_sys_tick;           // 再次读取毫秒计数
+    } while (ms1 != ms2);           // 若跨中断，重读一次
+
+    /* 计算当前毫秒内已经过去的tick数：SysTick为递减计数器 */
+    uint32_t elapsed_ticks_in_ms = (load - val); // 0..load
+
+    /* 转换为微秒：每ms共有 (SystemCoreClock/1000) 个ticks */
+    uint32_t us_in_this_ms = elapsed_ticks_in_ms / ticks_per_us;
+
+    /* 返回64位us时间，避免长时间溢出（>71分钟会超出32位） */
+    return ((uint64_t)ms1 * 1000ULL) + (uint64_t)us_in_this_ms;
+}

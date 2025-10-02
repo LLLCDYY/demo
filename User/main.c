@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "hal_system_init.h"
 #include "hw_config.h"
+#include "scheduler.h"
 
 int main(void)
 {
@@ -10,10 +11,6 @@ int main(void)
 
 	while(1)
 	{
-		LED1_HIGH();
-		Delay_ms(500);
-		LED1_LOW();
-		Delay_ms(500);
-		
+		scheduler_run();
 	}
 }

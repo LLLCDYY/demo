@@ -10,6 +10,7 @@
       <TargetName>stm32f103c8</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060960::V5.06 update 7 (build 960)::.\ARMCC</pArmCC>
       <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -339,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Start;..\User;..\Library;..\hal</IncludePath>
+              <IncludePath>..\Start;..\User;..\Library;..\hal;..\app</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -552,6 +553,16 @@
               <FileName>hw_config.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\hal\hw_config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app</GroupName>
+          <Files>
+            <File>
+              <FileName>scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\scheduler.c</FilePath>
             </File>
           </Files>
         </Group>
